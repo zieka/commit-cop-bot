@@ -19,7 +19,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/nock": "11.1.0",
     "nock": "13.0.2",
     "probot": "9.11.0",
     "probot-serverless-now": "2.1.2",
@@ -38,9 +37,6 @@
     "ts-jest": "26.1.3",
     "typescript": "3.3.1",
     "typescript-eslint-parser": "22.0.0"
-  },
-  "engines": {
-    "node": ">= 8.3.0"
   },
   "standard": {
     "parser": "typescript-eslint-parser",
