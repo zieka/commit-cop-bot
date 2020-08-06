@@ -1,4 +1,4 @@
-import { parseCommit } from 'parse-commit-message';
+import { parseCommit } from './parse-commit';
 import * as cct from 'conventional-commit-types';
 const commitTypes = Object.keys(cct.types);
 
