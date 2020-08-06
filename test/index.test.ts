@@ -1,6 +1,6 @@
 import * as nock from 'nock';
 
-describe('Balrogql', () => {
+describe('commit-cop', () => {
 	it('should be awesome', () => {
 		// Assert
 		expect(nock).toBeDefined();
