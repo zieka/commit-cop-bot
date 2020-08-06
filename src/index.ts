@@ -1,6 +1,6 @@
 import { Application, Context } from 'probot'; // eslint-disable-line no-unused-vars
 import { isSemanticMessage } from './is-semantic-message';
-import * as getConfig from 'probot-config';
+import getConfig from 'probot-config';
 
 const DEFAULT_OPTS = {
 	requireTitle: true,
@@ -10,7 +10,7 @@ const DEFAULT_OPTS = {
 	requireJira: true
 };
 
-async function commitsAreSemantic(context: Context, requireCommits: 'none' | 'some' | 'all', requireJira: boolean) {
+async function commitsAreSemantic(context: Context, requireCommits: string, requireJira: boolean) {
 	// get commits
 	const elements = await context.github.pulls.listCommits(
 		context.repo({
