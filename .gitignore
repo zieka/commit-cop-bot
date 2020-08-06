@@ -3,3 +3,4 @@ lib
 .env
 private-key.pem
 .data
+package-lock.json
