@@ -1,5 +1,6 @@
-const commitTypes = Object.keys(require('conventional-commit-types').types);
-const { parseCommit } = require('parse-commit-message');
+import { parseCommit } from 'parse-commit-message';
+import * as cct from 'conventional-commit-types';
+const commitTypes = Object.keys(cct.types);
 
 export function isSemanticMessage(message: string, requireJira = false) {
 	// if a jira is required then ensure that format is followed "ABC-123"
