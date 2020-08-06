@@ -105,7 +105,7 @@ export = (app: Application) => {
 		const status = {
 			sha: head.sha,
 			state,
-			target_url: 'https://github.com/zieka/commit-cop',
+			target_url: 'https://github.com/zieka/commit-cop-bot',
 			description: getDescription(),
 			context: 'Commit Cop'
 		};

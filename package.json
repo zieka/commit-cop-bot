@@ -1,5 +1,5 @@
 {
-  "name": "commit-cop-bot",
+  "name": "commit-cop",
   "version": "1.0.0",
   "description": "Enforces commit styling",
   "author": "Kyle Scully <scullykns@gmail.com>",
