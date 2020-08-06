@@ -12,6 +12,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "nodemon --exec \"probot run ./lib/index.js\"",
+    "postinstall": "npm run build",
     "prettier-check": "prettier --config package.json --list-different './**/*.ts'",
     "prettier-format": "prettier --config package.json --write './**/*.ts'",
     "receive": "node_modules/.bin/probot receive",
