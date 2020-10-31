@@ -7,10 +7,11 @@ const DEFAULT_OPTS = {
 	requireCommits: 'some',
 	requirePrBreakingChangeColon: true,
 	requireCommitBreakingChangeColon: true,
-	requireJira: true
+	requireJira: true,
+	allowedScopes: []
 };
 
-async function commitsAreSemantic(context: Context, requireCommits: string, requireJira: boolean) {
+async function commitsAreSemantic(context: Context, requireCommits: string, requireJira: boolean, allowedScopes: string[]) {
 	// get commits
 	const elements = await context.github.pulls.listCommits(
 		context.repo({
@@ -24,7 +25,7 @@ async function commitsAreSemantic(context: Context, requireCommits: string, requ
 	// determine if commits are semantic
 	let reason;
 	const hasSemanticCommits = commits[requireCommits === 'all' ? 'every' : 'some']((commit: any) => {
-		const parsedSemantic = isSemanticMessage(commit.message, requireJira);
+		const parsedSemantic = isSemanticMessage(commit.message, requireJira, allowedScopes);
 		if (parsedSemantic.status) {
 			return true;
 		}
@@ -48,7 +49,14 @@ export = (app: Application) => {
 		} catch (err) {
 			config = DEFAULT_OPTS;
 		}
-		let { requireTitle, requireCommits, requirePrBreakingChangeColon, requireCommitBreakingChangeColon, requireJira } = config;
+		let {
+			requireTitle,
+			requireCommits,
+			requirePrBreakingChangeColon,
+			requireCommitBreakingChangeColon,
+			requireJira,
+			allowedScopes
+		} = config;
 
 		// validate options are of correct type or set to default
 		if (typeof requireTitle !== 'boolean') {
@@ -69,10 +77,18 @@ export = (app: Application) => {
 		if (typeof requireJira !== 'boolean') {
 			requireJira = DEFAULT_OPTS.requireJira;
 		}
+		if (!Array.isArray(allowedScopes)) {
+			allowedScopes = DEFAULT_OPTS.allowedScopes;
+		}
 
 		const { title, head, body = '' } = context.payload.pull_request;
-		const hasSemanticTitle = isSemanticMessage(title, requireJira);
-		const { hasSemanticCommits, breakingCommitsHaveColons } = await commitsAreSemantic(context, requireCommits, requireJira);
+		const hasSemanticTitle = isSemanticMessage(title, requireJira, allowedScopes);
+		const { hasSemanticCommits, breakingCommitsHaveColons } = await commitsAreSemantic(
+			context,
+			requireCommits,
+			requireJira,
+			allowedScopes
+		);
 
 		const breakingPrHasColon = body.indexOf('BREAKING CHANGE') > -1 ? body.indexOf('BREAKING CHANGE:') > -1 : true;
 

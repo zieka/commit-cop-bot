@@ -67,6 +67,12 @@ Note: ☝️ those are the defaults
     -   ✅ - "DEV-111 - feat(scope): subject"
     -   ✅ - "DEV-4234 - feat: subject"
 
+### allowedScopes - `string[]` (optional)
+
+-   Provide a list of strings that are acceptable scopes. Commits containing scopes that are not present in the `allowedScopes` array will be
+    rejected
+-   Not providing any `allowedScopes` in the yaml will result in any scopes being acceptable.
+
 ## License
 
 [Apache 2.0](LICENSE)
