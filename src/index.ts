@@ -1,6 +1,5 @@
 import { Application, Context } from 'probot'; // eslint-disable-line no-unused-vars
 import { isSemanticMessage } from './is-semantic-message';
-import getConfig from 'probot-config';
 
 const DEFAULT_OPTS = {
 	requireTitle: true,
@@ -45,7 +44,7 @@ export = (app: Application) => {
 	app.on(['pull_request.opened', 'pull_request.edited', 'pull_request.synchronize'], async (context: Context) => {
 		let config;
 		try {
-			config = await getConfig(context, 'commit-cop.yml', DEFAULT_OPTS);
+			config = await context.config('commit-cop.yml', DEFAULT_OPTS);
 		} catch (err) {
 			config = DEFAULT_OPTS;
 		}
