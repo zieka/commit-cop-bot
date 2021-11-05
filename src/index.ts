@@ -48,14 +48,8 @@ export = (app: Application) => {
 		} catch (err) {
 			config = DEFAULT_OPTS;
 		}
-		let {
-			requireTitle,
-			requireCommits,
-			requirePrBreakingChangeColon,
-			requireCommitBreakingChangeColon,
-			requireJira,
-			allowedScopes
-		} = config;
+		let { requireTitle, requireCommits, requirePrBreakingChangeColon, requireCommitBreakingChangeColon, requireJira, allowedScopes } =
+			config;
 
 		// validate options are of correct type or set to default
 		if (typeof requireTitle !== 'boolean') {
